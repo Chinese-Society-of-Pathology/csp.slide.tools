@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <AssemblyName>sstools</AssemblyName>
+        <Platforms>AnyCPU;x64</Platforms>
+        <VersionPrefix>0.0.8</VersionPrefix>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <PackageReference Include="Cocona" Version="2.2.0" />
+        <PackageReference Include="Sqray.Slide.Converter" Version="1.1.109-beta1" />
+    </ItemGroup>
+
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+        <Message Text="Platform is: $(Platform)" />
+        <Message Text="OS is: $(OS)" />
+    </Target>
+
+    <PropertyGroup>
+        <Copyx64>$(MSBuildThisFileDirectory)..\..\native\win-x64\**\*</Copyx64>
+        <Copylinuxx64>$(MSBuildThisFileDirectory)..\..\native\linux-x64\**\*</Copylinuxx64>
+        <Copylinuxarm64>$(MSBuildThisFileDirectory)..\..\native\linux-arm64\**\*</Copylinuxarm64>
+        <Copyosxarm64>$(MSBuildThisFileDirectory)..\..\native\osx-arm64\**\*</Copyosxarm64>
+        <CopyAll>$(MSBuildThisFileDirectory)..\..\native\All\**\*</CopyAll>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="$(Copyx64)" Condition="('$(RuntimeIdentifier)' == 'win-x64' or ('$(RuntimeIdentifier)' == '' and '$(Platform)' == 'x64' and '$(OS)' == 'Windows_NT'))">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>%(RecursiveDir)\%(Filename)%(Extension)</Link>
+            <Visible>False</Visible>
+        </None>
+        <None Include="$(Copylinuxx64)" Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>%(RecursiveDir)\%(Filename)%(Extension)</Link>
+            <Visible>False</Visible>
+        </None>
+        <None Include="$(Copylinuxarm64)" Condition="'$(RuntimeIdentifier)' == 'linux-arm64'">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>%(RecursiveDir)\%(Filename)%(Extension)</Link>
+            <Visible>False</Visible>
+        </None>
+        <None Include="$(Copyosxarm64)" Condition="'$(RuntimeIdentifier)' == 'osx-arm64'">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>%(RecursiveDir)\%(Filename)%(Extension)</Link>
+            <Visible>False</Visible>
+        </None>
+        <None Include="$(CopyAll)">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <Link>%(RecursiveDir)\%(Filename)%(Extension)</Link>
+            <Visible>False</Visible>
+        </None>
+        <None Include="..\..\publish.ps1" Link="publish.ps1" />
+    </ItemGroup>
+
+</Project>

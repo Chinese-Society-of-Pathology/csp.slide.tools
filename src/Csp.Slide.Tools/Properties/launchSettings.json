@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Csp.Slide.Tools": {
+      "commandName": "Project",
+      "commandLineArgs": "scvt -r \"D:\\SQSData\\20210821_163309 - 副本.sdpc\" \"D:\\temp\\ddd.svs\""
+    }
+  }
+}
