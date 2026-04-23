@@ -1,3 +1,5 @@
+#在中华医学会病理学分会和中国医师协会病理科医师分会的支持下，推动实现数字病理切片多种格式向 CSP 格式的转换，助力病理数字切片共享格式的标准化、开放化和生态化发展。
+
 # Csp Slide Tools (`sstools`)
 
 A cross-platform command-line tool for converting pathology whole-slide image (WSI) formats.  
